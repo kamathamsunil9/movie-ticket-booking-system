@@ -1,0 +1,258 @@
+/* ================= GLOBAL ================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  background-color: #1f2937;
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: white;
+  margin-right: 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.navbar button {
+  background-color: #ef4444;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+  background-color: #2563eb;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* ================= LOGIN ================= */
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f7fa;
+}
+
+.login-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 20px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.login-card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background-color: #2563eb;
+}
+
+/* ================= THEATER ================= */
+.theater {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* SCREEN */
+.screen {
+  width: 70%;
+  margin: 30px auto;
+  padding: 15px;
+  background: linear-gradient(to right, #444, #bbb);
+  color: white;
+  border-radius: 50% / 20%;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* ROW */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px 0;
+}
+
+/* ROW LABEL */
+.row-label {
+  width: 30px;
+  font-weight: bold;
+}
+
+/* SEAT BLOCK */
+.seat-block {
+  display: flex;
+}
+
+/* AISLE */
+.aisle {
+  width: 50px;
+}
+
+/* ================= SEATS ================= */
+.seat {
+  margin: 3px;
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+
+.seat:hover {
+  transform: scale(1.05);
+}
+
+.seat.available {
+  background-color: #e0e0e0;
+}
+
+.seat.selected {
+  background-color: #22c55e;
+  color: white;
+}
+
+.seat.booked {
+  background-color: #ef4444;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* ================= LOADING ================= */
+.loading {
+  padding: 20px;
+  font-size: 18px;
+  color: gray;
+  text-align: center;
+}
+
+/* ================= BOOKING HEADER ================= */
+.booking-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.booking-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.booking-header p {
+  color: gray;
+  margin-top: 5px;
+}
+
+/* BOOKING FOOTER */
+.booking-footer {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.booking-footer p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* LEGEND */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend .seat {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}

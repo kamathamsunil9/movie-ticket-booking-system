@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  ticket-db:
+    image: postgres:15
+    container_name: ticket-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ticketdb
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./ticket-booking-system/ticket-booking-system
+    container_name: ticket-backend
+    ports:
+      - "8083:8083"
+    depends_on:
+      - ticket-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ticket-db:5432/ticketdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+
+  frontend:
+    build: ./ticket-frontend
+    container_name: ticket-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
