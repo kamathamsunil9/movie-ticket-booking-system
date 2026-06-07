@@ -50,12 +50,31 @@ function Booking() {
         });
 
       // Fetch ALL seats dynamically
-      API.get(`/booking/show/${selectedShow}/all-seats`)
-        .then((res) => setAllSeats(res.data))
-        .catch((err) => {
-          console.error("Error fetching seats:", err);
-          setErrorMessage("❌ Failed to load seats");
-        });
+API.get(`/booking/show/${selectedShow}/all-seats`)
+  .then((res) => {
+
+    const sortedSeats = [...res.data].sort((a, b) => {
+
+      const rowA = a.seatNumber.charAt(0);
+      const rowB = b.seatNumber.charAt(0);
+
+      if (rowA !== rowB) {
+        return rowA.localeCompare(rowB);
+      }
+
+      return (
+        parseInt(a.seatNumber.substring(1)) -
+        parseInt(b.seatNumber.substring(1))
+      );
+    });
+
+    setAllSeats(sortedSeats);
+
+  })
+  .catch((err) => {
+    console.error("Error fetching seats:", err);
+    setErrorMessage("❌ Failed to load seats");
+  });
 
     } catch (error) {
       console.error("Token decode failed:", error);
@@ -169,7 +188,7 @@ function Booking() {
           >
             {shows.map((show) => (
               <option key={show.id} value={show.id}>
-                {show.theater}
+                {show.movieName} - {show.theater} ({show.showTime})
               </option>
             ))}
           </select>

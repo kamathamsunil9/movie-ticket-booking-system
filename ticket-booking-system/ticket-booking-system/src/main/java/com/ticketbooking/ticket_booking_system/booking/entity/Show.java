@@ -24,6 +24,12 @@ public class Show {
     @Column(name = "theater_name", nullable = false)
     private String theater;
 
+    @Column(name = "show_time")
+    private String showTime;
+
+    @Column(name = "movie_name")
+    private String movieName;
+
     
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -34,10 +40,11 @@ public class Show {
     }
 
     
-    public Show(String theater) {
-        this.theater = theater;
-    }
-
+    public Show(String theater, String showTime, String movieName) {
+    this.theater = theater;
+    this.showTime = showTime;
+    this.movieName = movieName;
+}
     
 
     public Integer getId() {
@@ -55,6 +62,22 @@ public class Show {
     public void setTheater(String theater) {
         this.theater = theater;
     }
+
+    public String getShowTime() {
+    return showTime;
+}
+
+    public void setShowTime(String showTime) {
+    this.showTime = showTime;
+}
+
+    public String getMovieName() {
+    return movieName;
+}
+
+    public void setMovieName(String movieName) {
+    this.movieName = movieName;
+}
 
     public List<Seat> getSeats() {
         return seats;

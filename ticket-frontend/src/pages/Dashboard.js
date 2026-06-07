@@ -10,32 +10,49 @@ function Dashboard() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+
   let decoded = null;
-if (token && token.split('.').length === 3) {
+
+  if (token && token.split(".").length === 3) {
     try {
-        decoded = jwtDecode(token);
+      decoded = jwtDecode(token);
     } catch (error) {
-        console.error("Token decoding failed:", error);
-        // Optional: localStorage.removeItem('token'); 
+      console.error("Token decoding failed:", error);
     }
-}
+  }
+
   const email = decoded?.sub;
 
-
   useEffect(() => {
-  const fetchBookings = async () => {
+    const fetchBookings = async () => {
+      try {
+        const res = await API.get(`/booking/user/${email}`);
+        setBookings(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        alert("Failed to fetch bookings");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (email) {
+      fetchBookings();
+    }
+  }, [email]);
+
+  const handleCancelBooking = async (bookingId) => {
     try {
-      const res = await API.get(`/booking/user/${email}`);
-      setBookings(Array.isArray(res.data) ? res.data : []);
+      await API.delete(`/booking/cancel?bookingId=${bookingId}`);
+
+      setBookings((prevBookings) =>
+        prevBookings.filter((booking) => booking.id !== bookingId)
+      );
+
+      alert("Booking Cancelled Successfully");
     } catch (err) {
-      alert("Failed to fetch bookings");
-    } finally {
-      setLoading(false);
+      alert("Failed to cancel booking");
     }
   };
-
-  fetchBookings();
-}, [email]);
 
   if (loading) {
     return (
@@ -53,9 +70,12 @@ if (token && token.split('.').length === 3) {
       <div className="container">
         <h2>Dashboard</h2>
 
-      <button onClick={() => navigate("/booking")} className="btn">
-        Go to Booking
-      </button>
+        <button
+          onClick={() => navigate("/booking")}
+          className="btn"
+        >
+          Go to Booking
+        </button>
 
         <h3 style={{ marginTop: "20px" }}>
           Your Bookings ({bookings.length})
@@ -69,8 +89,25 @@ if (token && token.split('.').length === 3) {
           bookings.map((b) => (
             <div key={b.id} className="card">
               <p><b>Booking ID:</b> {b.id}</p>
+
               <p><b>Theater:</b> {b.show?.theater}</p>
+
+              <p><b>Movie:</b> {b.show?.movieName}</p>
+
+              <p><b>Show Time:</b> {b.show?.showTime}</p>
+
               <p><b>Seats:</b> {b.seats?.map(s => s.seatNumber).join(", ")}</p>
+
+              <button
+                className="btn"
+                style={{
+                  marginTop: "10px",
+                  backgroundColor: "#dc3545",
+                }}
+                onClick={() => handleCancelBooking(b.id)}
+              >
+                Cancel Booking
+              </button>
             </div>
           ))
         )}

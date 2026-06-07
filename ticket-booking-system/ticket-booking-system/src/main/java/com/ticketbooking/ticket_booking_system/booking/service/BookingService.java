@@ -138,14 +138,34 @@ public class BookingService {
     }
 
     // Get ALL seats with booked status
-    public List<Seat> getAllSeats(Long showId) {
+public List<Seat> getAllSeats(Long showId) {
 
-        Show show = showRepository.findById(showId.intValue()).orElse(null);
+    Show show = showRepository.findById(showId.intValue()).orElse(null);
 
-        if (show == null) {
-            return new ArrayList<>();
+    if (show == null) {
+        return new ArrayList<>();
+    }
+
+    List<Seat> seats = new ArrayList<>(show.getSeats());
+
+    seats.sort((s1, s2) -> {
+
+        String seat1 = s1.getSeatNumber();
+        String seat2 = s2.getSeatNumber();
+
+        char row1 = seat1.charAt(0);
+        char row2 = seat2.charAt(0);
+
+        if (row1 != row2) {
+            return Character.compare(row1, row2);
         }
 
-        return show.getSeats();
-    }
+        int num1 = Integer.parseInt(seat1.substring(1));
+        int num2 = Integer.parseInt(seat2.substring(1));
+
+        return Integer.compare(num1, num2);
+    });
+
+    return seats;
+}
 }

@@ -25,11 +25,44 @@ function Admin() {
     }
   };
 
-  // Total booked seats count
+  const handleCancelBooking = async (bookingId) => {
+    try {
+
+      await API.delete(`/booking/cancel?bookingId=${bookingId}`);
+
+      setBookings((prevBookings) =>
+        prevBookings.filter(
+          (booking) => booking.id !== bookingId
+        )
+      );
+
+      alert("Booking Cancelled Successfully");
+
+    } catch (err) {
+      alert("Failed to cancel booking");
+    }
+  };
+
+  // Total booked seats
   const totalSeatsBooked = bookings.reduce(
     (total, booking) => total + booking.seats.length,
     0
   );
+
+  // Theater statistics
+  const theaterStats = bookings.reduce((acc, booking) => {
+
+    const theater = booking.show?.theater;
+
+    if (!acc[theater]) {
+      acc[theater] = 0;
+    }
+
+    acc[theater]++;
+
+    return acc;
+
+  }, {});
 
   return (
     <>
@@ -50,8 +83,9 @@ function Admin() {
           </div>
         )}
 
-        {/* Stats */}
+        {/* Statistics Cards */}
         <div className="admin-stats">
+
           <div className="stat-card">
             <h3>{bookings.length}</h3>
             <p>Total Bookings</p>
@@ -61,27 +95,66 @@ function Admin() {
             <h3>{totalSeatsBooked}</h3>
             <p>Total Seats Booked</p>
           </div>
+
+        </div>
+
+        {/* Theater Statistics */}
+        <div
+          className="card"
+          style={{
+            marginBottom: "20px",
+            padding: "20px"
+          }}
+        >
+          <h3>🎭 Theater Statistics</h3>
+
+          {Object.entries(theaterStats).length === 0 ? (
+            <p>No theater bookings yet</p>
+          ) : (
+            Object.entries(theaterStats).map(
+              ([theater, count]) => (
+                <p key={theater}>
+                  <b>{theater}</b> : {count} Booking(s)
+                </p>
+              )
+            )
+          )}
         </div>
 
         {/* Loading */}
         {loading ? (
-          <p style={{ textAlign: "center" }}>Loading bookings...</p>
+
+          <p style={{ textAlign: "center" }}>
+            Loading bookings...
+          </p>
+
         ) : bookings.length === 0 ? (
 
-          <p style={{ color: "gray", textAlign: "center" }}>
+          <p
+            style={{
+              color: "gray",
+              textAlign: "center"
+            }}
+          >
             No bookings found
           </p>
 
         ) : (
 
           <div className="booking-grid">
+
             {bookings.map((b) => (
-              <div key={b.id} className="admin-card">
+
+              <div
+                key={b.id}
+                className="admin-card"
+              >
 
                 <h3>🎟 Booking #{b.id}</h3>
 
                 <p>
-                  <b>User:</b> {b.user?.email}
+                  <b>User:</b>{" "}
+                  {b.user?.email}
                 </p>
 
                 <p>
@@ -89,17 +162,37 @@ function Admin() {
                 </p>
 
                 <p>
+                  <b>Movie:</b> {b.show?.movieName}
+                </p>
+
+                <p>
+                  <b>Show Time:</b> {b.show?.showTime}
+                </p>
+
+                <p>
                   <b>Seats:</b>{" "}
                   {b.seats?.map((s) => s.seatNumber).join(", ")}
                 </p>
 
-                <p>
-                  <b>Total Seats:</b> {b.seats?.length}
-                </p>
+                <button
+                  className="btn"
+                  style={{
+                    marginTop: "10px",
+                    backgroundColor: "#dc3545"
+                  }}
+                  onClick={() =>
+                    handleCancelBooking(b.id)
+                  }
+                >
+                  Cancel Booking
+                </button>
 
               </div>
+
             ))}
+
           </div>
+
         )}
       </div>
     </>
