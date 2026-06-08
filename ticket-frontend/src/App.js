@@ -3,6 +3,7 @@ import Admin from "./pages/Admin";
 import Booking from "./pages/Booking";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
         
         {/* Public Routes */}
         <Route path="/login" element={<Login />} />
+
+        <Route path="/register" element={<Register />} />
         
 
         {/* Protected Routes */}

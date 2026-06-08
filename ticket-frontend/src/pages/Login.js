@@ -60,8 +60,16 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Login</h2>
-        <p>Enter your credentials to access PVR Cinema</p>
+        <h1 className="logo">🎬 PVR Cinema</h1>
+        <div className="welcome-icon">
+  🍿
+</div>
+
+<h2>Welcome Back!</h2>
+
+<p className="login-subtitle">
+  Login to access your PVR Cinema account
+</p>
 
         <input
           type="email"
@@ -80,6 +88,20 @@ function Login() {
         <button onClick={handleLogin} className="btn-login">
           Login
         </button>
+
+        <p style={{ marginTop: "15px", textAlign: "center" }}>
+          Don't have an account?{" "}
+        <span
+          onClick={() => navigate("/register")}
+          style={{
+          color: "#2563eb",
+          cursor: "pointer",
+          fontWeight: "bold"
+        }}
+        >
+          Register
+        </span>
+        </p>
       </div>
     </div>
   );
