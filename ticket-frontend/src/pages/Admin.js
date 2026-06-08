@@ -64,6 +64,14 @@ function Admin() {
 
   }, {});
 
+  const totalTheaters = new Set(
+  bookings.map((b) => b.show?.theater)
+).size;
+
+const totalMovies = new Set(
+  bookings.map((b) => b.show?.movieName)
+).size;
+
   return (
     <>
       <Navbar />
@@ -71,9 +79,19 @@ function Admin() {
       <div className="container">
 
         {/* Header */}
-        <div className="admin-header">
-          <h2>🎬 Admin Dashboard</h2>
-          <p>Manage all cinema bookings</p>
+          <div className="welcome-card">
+            <h1 style={{ marginBottom: "10px" }}>
+                🎬 PVR Admin Dashboard
+            </h1>
+
+            <p
+              style={{
+              color: "#666",
+              fontSize: "18px"
+        }}
+    >
+                Manage bookings, monitor theaters and control operations.
+            </p>
         </div>
 
         {/* Error Message */}
@@ -87,16 +105,30 @@ function Admin() {
         <div className="admin-stats">
 
           <div className="stat-card">
+            <h2>🎟</h2>
             <h3>{bookings.length}</h3>
             <p>Total Bookings</p>
-          </div>
+        </div>
 
           <div className="stat-card">
+            <h2>💺</h2>
             <h3>{totalSeatsBooked}</h3>
             <p>Total Seats Booked</p>
-          </div>
-
         </div>
+
+          <div className="stat-card">
+            <h2>🎭</h2>
+            <h3>{totalTheaters}</h3>
+            <p>Theaters</p>
+        </div>
+
+          <div className="stat-card">
+            <h2>🎬</h2>
+            <h3>{totalMovies}</h3>
+            <p>Movies</p>
+        </div>
+
+    </div>
 
         {/* Theater Statistics */}
         <div
@@ -150,7 +182,9 @@ function Admin() {
                 className="admin-card"
               >
 
-                <h3>🎟 Booking #{b.id}</h3>
+                <h3 style={{ color: "#2563eb" }}>
+                  🎟 Booking #{b.id}
+                </h3>
 
                 <p>
                   <b>User:</b>{" "}
@@ -184,7 +218,7 @@ function Admin() {
                     handleCancelBooking(b.id)
                   }
                 >
-                  Cancel Booking
+                  ❌ Cancel Booking
                 </button>
 
               </div>
