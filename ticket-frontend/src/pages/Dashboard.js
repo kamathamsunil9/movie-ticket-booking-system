@@ -1,7 +1,7 @@
+import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { jwtDecode } from "jwt-decode";
 import API from "../services/api";
 
 function Dashboard() {
@@ -63,56 +63,136 @@ function Dashboard() {
     );
   }
 
+  const totalBookings = bookings.length;
+
+const totalMovies = new Set(
+  bookings.map((b) => b.show?.movieName)
+).size;
+
+const totalTheaters = new Set(
+  bookings.map((b) => b.show?.theater)
+).size;
+
+const totalSeats = bookings.reduce(
+  (count, booking) => count + (booking.seats?.length || 0),
+  0
+);
+
   return (
-    <>
-      <Navbar />
+    <div className="container">
+      <div style={{ width: "100%" }}>
+        <Navbar />
 
-      <div className="container">
-        <h2>Dashboard</h2>
+        <div className="container">
 
-        <button
-          onClick={() => navigate("/booking")}
-          className="btn"
-        >
-          Go to Booking
-        </button>
+            <div className="welcome-card">
 
-        <h3 style={{ marginTop: "20px" }}>
-          Your Bookings ({bookings.length})
-        </h3>
+              <h1 style={{ fontSize: "40px", marginBottom: "10px" }}>
+                  🎬 PVR Cinema Dashboard
+              </h1>
+              <h2>Welcome Back!</h2>
 
-        {bookings.length === 0 ? (
-          <p style={{ color: "gray" }}>
-            No bookings yet. Go book your first seat
-          </p>
-        ) : (
-          bookings.map((b) => (
-            <div key={b.id} className="card">
-              <p><b>Booking ID:</b> {b.id}</p>
-
-              <p><b>Theater:</b> {b.show?.theater}</p>
-
-              <p><b>Movie:</b> {b.show?.movieName}</p>
-
-              <p><b>Show Time:</b> {b.show?.showTime}</p>
-
-              <p><b>Seats:</b> {b.seats?.map(s => s.seatNumber).join(", ")}</p>
+              <p
+                style={{
+                    color: "#666",
+                    fontSize: "18px",
+                    marginBottom: "25px",
+                }}
+          >
+                  Manage your movie bookings and reserve your next seat.
+              </p>
 
               <button
+                onClick={() => navigate("/booking")}
                 className="btn"
-                style={{
-                  marginTop: "10px",
-                  backgroundColor: "#dc3545",
-                }}
-                onClick={() => handleCancelBooking(b.id)}
-              >
-                Cancel Booking
+                  style={{
+                  padding: "12px 25px",
+                  fontSize: "16px",
+                  borderRadius: "8px",
+              }}
+      >
+          🎟 Book New Ticket
               </button>
-            </div>
-          ))
-        )}
+
       </div>
-    </>
+
+          <div className="dashboard-stats">
+            <div className="stat-card">
+            <h2>🎫</h2>
+            <h3>{totalBookings}</h3>
+            <p>Total Bookings</p>
+          </div>
+
+          <div className="stat-card">
+            <h2>🎬</h2>
+            <h3>{totalMovies}</h3>
+            <p>Movies</p>
+          </div>
+
+          <div className="stat-card">
+            <h2>🏢</h2>
+            <h3>{totalTheaters}</h3>
+            <p>Theaters</p>
+          </div>
+
+          <div className="stat-card">
+            <h2>💺</h2>
+            <h3>{totalSeats}</h3>
+            <p>Seats Booked</p>
+          </div>
+        </div>
+          
+
+          <h3
+            style={{
+              marginTop: "30px",
+              marginBottom: "20px",
+              fontSize: "28px",
+            }}
+          >
+            📋 Your Bookings ({bookings.length})
+          </h3>
+
+          {bookings.length === 0 ? (
+            <p style={{ color: "gray" }}>
+              No bookings yet. Go book your first seat
+            </p>
+          ) : (
+            bookings.map((b) => (
+              <div key={b.id} className="card">
+                <p>
+                  🎭 <b>Theater:</b> {b.show?.theater}
+                </p>
+
+                <p>
+                  🎬 <b>Movie:</b> {b.show?.movieName}
+                </p>
+
+                <p>
+                  🕒 <b>Show Time:</b> {b.show?.showTime}
+                </p>
+
+                <p>
+                  💺 <b>Seats:</b>{" "}
+                  {b.seats?.map((s) => s.seatNumber).join(", ")}
+                </p>
+
+                <button
+                  className="btn"
+                  style={{
+                    marginTop: "10px",
+                    backgroundColor: "#dc3545",
+                  }}
+                  onClick={() => handleCancelBooking(b.id)}
+                >
+                  ❌ Cancel Booking
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

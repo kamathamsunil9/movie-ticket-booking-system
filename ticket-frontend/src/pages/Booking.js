@@ -163,36 +163,38 @@ API.get(`/booking/show/${selectedShow}/all-seats`)
       <div className="container">
 
         {/* Header */}
-        <div className="booking-header">
-          <h2>🎬 Movie Ticket Booking</h2>
-          <p>Select your theater and seats</p>
-        </div>
+        <div className="booking-header-card">
 
-        {/* Theater Dropdown */}
-        <div style={{ marginBottom: "20px" }}>
-          <label>
-            <b>Select Theater:</b>
-          </label>
+        <h2 className="booking-title">
+          🎬 Movie Ticket Booking
+        </h2>
 
-          <select
-            value={selectedShow}
-            onChange={(e) => {
-              setSelectedSeats([]);
-              setSelectedShow(e.target.value);
-            }}
-            style={{
-              marginLeft: "10px",
-              padding: "8px",
-              borderRadius: "8px",
-            }}
-          >
-            {shows.map((show) => (
-              <option key={show.id} value={show.id}>
-                {show.movieName} - {show.theater} ({show.showTime})
-              </option>
-            ))}
-          </select>
-        </div>
+        <p className="booking-subtitle">
+          Select your theater and seats
+        </p>
+
+      <div>
+        <label>
+          <b>Select Theater:</b>
+        </label>
+
+      <select
+        className="booking-select"
+        value={selectedShow}
+        onChange={(e) => {
+          setSelectedSeats([]);
+          setSelectedShow(e.target.value);
+        }}
+      >
+        {shows.map((show) => (
+          <option key={show.id} value={show.id}>
+            {show.movieName} - {show.theater} ({show.showTime})
+          </option>
+        ))}
+      </select>
+    </div>
+
+  </div>
 
         {/* Seat Legend */}
         <div className="legend">
