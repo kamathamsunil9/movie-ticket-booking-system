@@ -4,7 +4,20 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import API from "../services/api";
 
+import salaar from "../assets/movies/salaar.jpg";
+import rrr from "../assets/movies/rrr.jpg";
+import pushpa2 from "../assets/movies/pushpa2.jpg";
+import peddi from "../assets/movies/peddi.jpg";
+
 function Dashboard() {
+
+  const movieImages = {
+  Salaar: salaar,
+  RRR: rrr,
+  "Pushpa 2": pushpa2,
+  Peddi: peddi,
+};
+
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -160,34 +173,49 @@ const totalSeats = bookings.reduce(
           ) : (
             bookings.map((b) => (
               <div key={b.id} className="card">
-                <p>
+
+                  <div className="booking-content">
+
+                  <div className="booking-details">
+
+              <p>
                   🎭 <b>Theater:</b> {b.show?.theater}
-                </p>
+              </p>
 
-                <p>
+              <p>
                   🎬 <b>Movie:</b> {b.show?.movieName}
-                </p>
+              </p>
 
-                <p>
+              <p>
                   🕒 <b>Show Time:</b> {b.show?.showTime}
-                </p>
+              </p>
 
-                <p>
+              <p>
                   💺 <b>Seats:</b>{" "}
-                  {b.seats?.map((s) => s.seatNumber).join(", ")}
-                </p>
+                    {b.seats?.map((s) => s.seatNumber).join(", ")}
+              </p>
 
-                <button
+              <button
                   className="btn"
                   style={{
-                    marginTop: "10px",
-                    backgroundColor: "#dc3545",
-                  }}
+                  marginTop: "10px",
+                  backgroundColor: "#dc3545",
+                }}
                   onClick={() => handleCancelBooking(b.id)}
                 >
                   ❌ Cancel Booking
-                </button>
-              </div>
+            </button>
+
+    </div>
+
+              <img
+                  src={movieImages[b.show?.movieName]}
+                  alt={b.show?.movieName}
+                  className="movie-poster"
+              />
+
+          </div>
+  </div>
             ))
           )}
         </div>
