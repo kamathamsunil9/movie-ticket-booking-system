@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import loginIcon from "../assets/login-icon.png";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginType, setLoginType] = useState("USER");
   const navigate = useNavigate();
 
   // 1. Break the loop: Clear any old/broken tokens when the Login page loads
@@ -32,7 +34,7 @@ function Login() {
 
       if (token && token.split('.').length === 3) {
         // Only save if it looks like a valid 3-part JWT
-       localStorage.setItem("token", token);
+        localStorage.setItem("token", token);
 
          // Decode JWT payload
         const payload = JSON.parse(atob(token.split(".")[1]));
@@ -62,14 +64,44 @@ function Login() {
       <div className="login-card">
         <h1 className="logo">🎬 PVR Cinema</h1>
         <div className="welcome-icon">
-  🍿
-</div>
+          <img
+          src={loginIcon}
+          alt="Cinema Icon"
+          className="login-icon"
+        />
+      </div>
 
 <h2>Welcome Back!</h2>
 
 <p className="login-subtitle">
   Login to access your PVR Cinema account
 </p>
+
+<div className="login-role-selector">
+  <p><b>Login As</b></p>
+
+  <div className="role-options">
+    <label>
+      <input
+        type="radio"
+        value="USER"
+        checked={loginType === "USER"}
+        onChange={(e) => setLoginType(e.target.value)}
+      />
+      👤 User
+    </label>
+
+    <label>
+      <input
+        type="radio"
+        value="ADMIN"
+        checked={loginType === "ADMIN"}
+        onChange={(e) => setLoginType(e.target.value)}
+      />
+      🛡️ Admin
+    </label>
+  </div>
+</div>
 
         <input
           type="email"

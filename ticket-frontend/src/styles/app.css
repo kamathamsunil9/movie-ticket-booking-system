@@ -99,15 +99,16 @@ body {
 .login-card {
   background: rgba(255,255,255,0.95);
   backdrop-filter: blur(8px);
-  padding: 30px;
+  padding: 25px;
   border-radius: 12px;
-  width: 420px;
-  min-height: 420px;
+  width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .login-card h2 {
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .login-card input {
@@ -261,18 +262,19 @@ body {
   align-items: center;
   color: #2563eb;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .welcome-icon {
   font-size: 50px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .login-subtitle {
   text-align: center;
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .dashboard-stats {
@@ -387,14 +389,6 @@ body {
   transition: 0.2s ease;
 }
 
-/* ================= MOVIE POSTER ================= */
-.movie-poster {
-  width: 150px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
 /* ================= BOOKING CARD ================= */
 
 .booking-content {
@@ -413,6 +407,53 @@ body {
   object-fit: cover;
   border-radius: 12px;
   margin-left: 20px;
+}
+
+/* ================= LOGIN ROLE SELECTOR ================= */
+
+.login-role-selector {
+  margin-bottom: 15px;
+}
+
+.login-role-selector p {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.role-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.role-options label {
+  background: #f5f7fa;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.role-options label:hover {
+  border-color: #2563eb;
+  transform: translateY(-2px);
+}
+
+.role-options label:has(input:checked) {
+  border-color: #2563eb;
+  background: #eef4ff;
+}
+
+.role-options input[type="radio"] {
+  margin-right: 8px;
+}
+
+.login-icon {
+  width: 45px;
+  height: auto;
+  background: transparent;
 }
 
 
