@@ -456,4 +456,22 @@ body {
   background: transparent;
 }
 
+.entry-exit-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.entry-label {
+  color: #22c55e;
+  font-size: 18px;
+}
+
+.exit-label {
+  color: #ef4444;
+  font-size: 18px;
+}
+
 

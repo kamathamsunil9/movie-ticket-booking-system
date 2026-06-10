@@ -218,6 +218,11 @@ API.get(`/booking/show/${selectedShow}/all-seats`)
             SCREEN
           </div>
 
+          <div className="entry-exit-bar">
+                <span className="entry-label">🚪🚶 ENTRY</span>
+                <span className="exit-label">EXIT 🚶🚪</span>
+          </div>
+
           <div
             style={{
               display: "grid",
