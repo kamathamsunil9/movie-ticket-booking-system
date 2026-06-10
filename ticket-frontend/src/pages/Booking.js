@@ -25,6 +25,14 @@ function Booking() {
   const pricePerSeat = 150;
   const totalPrice = selectedSeats.length * pricePerSeat;
 
+  const availableSeats = allSeats.filter(
+  (seat) => !seat.booked
+).length;
+
+  const bookedSeats = allSeats.filter(
+  (seat) => seat.booked
+).length;
+
   // Auth + Fetch Seats
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -209,6 +217,11 @@ API.get(`/booking/show/${selectedShow}/all-seats`)
           <div>
             <span className="seat booked"></span> Booked
           </div>
+        </div>
+
+        <div className="seat-stats">
+          <div>🟢 Available Seats: {availableSeats}</div>
+          <div>🔴 Booked Seats: {bookedSeats}</div>
         </div>
 
         {/* Theater */}

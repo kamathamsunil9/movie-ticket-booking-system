@@ -474,4 +474,13 @@ body {
   font-size: 18px;
 }
 
+.seat-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 
