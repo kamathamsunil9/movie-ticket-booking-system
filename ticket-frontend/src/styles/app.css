@@ -83,7 +83,7 @@ body {
   cursor: not-allowed;
 }
 
-/* ================= LOGIN ================= */
+/* ================= LOGIN PAGE ================= */
 .login-container {
   height: 100vh;
   display: flex;
@@ -134,7 +134,7 @@ body {
   background-color: #2563eb;
 }
 
-/* ================= THEATER ================= */
+/* ================= THEATER LAYOUT ================= */
 .theater {
   text-align: center;
   margin-top: 20px;
@@ -248,6 +248,7 @@ body {
   padding: 0;
 }
 
+/* ================= ADMIN DASHBOARD STATS ================= */
 .admin-stats {
   display: flex;
   gap: 20px;
@@ -256,6 +257,7 @@ body {
   flex-wrap: wrap;
 }
 
+/* ================= LOGO & WELCOME SECTION ================= */
 .logo {
   display: flex;
   justify-content: center;
@@ -277,6 +279,7 @@ body {
   margin-bottom: 15px;
 }
 
+/* ================= DASHBOARD STATISTICS ================= */
 .dashboard-stats {
   display: flex;
   gap: 20px;
@@ -325,6 +328,7 @@ body {
   font-weight: 600;
 }
 
+/* ================= WELCOME CARD ================= */
 .welcome-card {
   background: white;
   padding: 20px;
@@ -333,6 +337,7 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* ================= BOOKING HEADER ================= */
 .booking-header-card {
   background: white;
   padding: 25px;
@@ -401,6 +406,7 @@ body {
   flex: 1;
 }
 
+/* ================= MOVIE POSTER ================= */
 .movie-poster {
   width: 180px;
   height: 260px;
@@ -456,6 +462,7 @@ body {
   background: transparent;
 }
 
+/* ================= THEATER ENTRY & EXIT ================= */
 .entry-exit-bar {
   display: flex;
   justify-content: space-between;
@@ -474,6 +481,7 @@ body {
   font-size: 18px;
 }
 
+/* ================= SEAT STATISTICS ================= */
 .seat-stats {
   display: flex;
   justify-content: center;
@@ -483,6 +491,7 @@ body {
   font-size: 16px;
 }
 
+/* ================= BOOKING CONFIRMATION PAGE ================= */
 .confirmation-page {
   height: 100vh;
   display: flex;
