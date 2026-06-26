@@ -483,4 +483,37 @@ body {
   font-size: 16px;
 }
 
+.confirmation-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fa;
+}
+
+.confirmation-card {
+  background: white;
+  width: 450px;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.success-icon {
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+
+.confirmation-subtitle {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.confirmation-details {
+  text-align: left;
+  line-height: 2;
+  margin: 25px 0;
+}
+
 

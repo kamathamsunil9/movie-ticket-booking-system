@@ -4,7 +4,9 @@ import Booking from "./pages/Booking";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import BookingConfirmed from "./pages/BookingConfirmed";
 import PrivateRoute from "./PrivateRoute";
+
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
+
+        <Route path="/booking-confirmed" element={<BookingConfirmed />} />
         
 
         {/* Protected Routes */}

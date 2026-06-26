@@ -143,14 +143,24 @@ API.get(`/booking/show/${selectedShow}/all-seats`)
         }
       );
 
-      // Success
-      setSuccessMessage("🎉 Booking Successful!");
-      setSelectedSeats([]);
+      // Confirmed Booking 
+      navigate("/booking-confirmed", {
+  state: {
+    movie:
+      shows.find(
+        (s) => s.id == selectedShow
+      )?.movieName,
 
-      // Redirect after short delay
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 1500);
+    theater:
+      shows.find(
+        (s) => s.id == selectedShow
+      )?.theater,
+
+    seats: selectedSeats,
+
+    amount: totalPrice,
+  },
+});
 
     } catch (err) {
 
