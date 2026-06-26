@@ -4,7 +4,7 @@
 
 A full-stack Movie Ticket Booking System built using React.js, Spring Boot, PostgreSQL, JWT Authentication, and Docker.
 
-The application allows users to browse movie shows, select seats, book tickets, manage bookings, and view booking history through an interactive dashboard. Administrators can monitor bookings, view theater statistics, and manage theater operations through a dedicated admin dashboard.
+The application allows users to browse movie shows, select theaters and seats, book tickets, manage reservations, and view booking history through an interactive dashboard. Administrators can monitor bookings, analyze theater statistics, manage cancellations, and oversee seat occupancy through a dedicated admin dashboard.
 
 ---
 
@@ -17,6 +17,8 @@ The application allows users to browse movie shows, select seats, book tickets, 
 - Theater & Show Selection
 - Interactive Seat Booking System
 - Real-Time Seat Availability
+- Available & Booked Seat Statistics
+- Booking Confirmation Page
 - Booking Dashboard
 - Cancel Bookings
 - Movie Poster Integration
@@ -34,7 +36,9 @@ The application allows users to browse movie shows, select seats, book tickets, 
 - Dynamic Seat Generation
 - Multiple Theaters
 - Different Theater Capacities
-- Real-Time Seat Status
+- Real-Time Seat Availability
+- Available & Booked Seat Statistics
+- Entry & Exit Indicators
 - Interactive Seat Selection Interface
 
 ---
@@ -144,6 +148,9 @@ View booking history, movie posters, and booking statistics.
 ### Seat Booking Page
 Interactive theater seat selection with real-time availability.
 
+### Booking Confirmation Page
+Dedicated booking success page displaying movie, theater, seats, and booking amount.
+
 ### Admin Dashboard
 Monitor bookings and theater statistics.
 
@@ -231,7 +238,9 @@ http://localhost:8080
 ### Booking Module
 - Seat Selection
 - Ticket Booking
+- Booking Confirmation Page
 - Booking Cancellation
+- Seat Availability Statistics
 
 ### Dashboard Module
 - User Statistics
@@ -273,6 +282,7 @@ Through this project, I gained hands-on experience in:
 - Git & GitHub Workflow
 - Frontend and Backend Integration
 - Role-Based Access Control
+- UI/UX Design and Frontend Optimization
 
 ---
 
