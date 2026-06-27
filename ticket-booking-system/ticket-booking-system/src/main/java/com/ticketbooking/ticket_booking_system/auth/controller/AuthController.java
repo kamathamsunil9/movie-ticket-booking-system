@@ -34,8 +34,6 @@ public class AuthController {
             User registeredUser = userService.register(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
         } catch (Exception e) {
-
-            // it Return 400 Bad Request if registration fails
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
@@ -43,21 +41,46 @@ public class AuthController {
     // LOGIN API
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-        User dbUser = userService.login(user.getEmail(), user.getPassword());
 
-        if (dbUser != null) {
-            String token = jwtUtil.generateToken(
-                dbUser.getEmail(),
-                dbUser.getRole().name()
-            );
+        // 1. Fetch user records from database directly by email first
+        User dbUser = userService.findByEmail(user.getEmail());
 
-            // Return token inside a JSON object
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
-            return ResponseEntity.ok(response);
+        // 2. If email doesn't exist in system
+        if (dbUser == null) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
         }
 
-        // Returns 401 Unauthorized so the Frontend knows login failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        // 3. ROLE CHECK (Safe string comparison to bypass reference or type issues)
+        String requestedRole = (user.getRole() != null) ? user.getRole().toString() : "";
+        String databaseRole = (dbUser.getRole() != null) ? dbUser.getRole().toString() : "";
+
+        if (!requestedRole.isEmpty() && !databaseRole.equalsIgnoreCase(requestedRole)) {
+            System.out.println("ROLE MISMATCH CALLED: Request Role: " + requestedRole + ", DB Role: " + databaseRole);
+
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Invalid role selected");
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+        }
+
+        // 4. PASSWORD CHECK
+        User authenticatedUser = userService.login(user.getEmail(), user.getPassword());
+        if (authenticatedUser == null) {
+            Map<String, String> error = new HashMap<>();
+            error.put("message", "Invalid email or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+        }
+
+        // 5. SUCCESSFUL LOGIN -> Create Token using authenticated instance
+        String token = jwtUtil.generateToken(
+                authenticatedUser.getEmail(),
+                authenticatedUser.getRole().name());
+
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -15,14 +15,14 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder; // 
+    private PasswordEncoder passwordEncoder; 
 
     // REGISTER 
     public User register(User user) {
         try {
             System.out.println("Registering user: " + user.getEmail());
             
-            //  HASH THE PASSWORD before saving
+            // HASH THE PASSWORD before saving
             String hashedPw = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashedPw);
 
@@ -47,13 +47,22 @@ public class UserService {
             return null;
         }
 
-        //  passwordEncoder.matches() instead of .equals()
-        // It compares the raw input ("2004") with the hash in DB ($2a$10...)
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            System.out.println("Login failed: Password mismatch");
+        System.out.println("EMAIL FOUND: " + user.getEmail());
+        System.out.println("ROLE FOUND: " + user.getRole());
+
+        boolean match = passwordEncoder.matches(password, user.getPassword());
+
+        System.out.println("PASSWORD MATCH = " + match);
+
+        if (!match) {
             return null;
         }
 
         return user;
+    }
+
+    // --- AUTHCONTROLLER CAN EXECUTELY CHECK THE ROLE ---
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
