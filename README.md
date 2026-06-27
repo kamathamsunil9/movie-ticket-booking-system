@@ -1,102 +1,129 @@
 # 🎬 Movie Ticket Booking System
 
-## Overview
+## 📌 Project Overview
 
-A full-stack Movie Ticket Booking System built using React.js, Spring Boot, PostgreSQL, JWT Authentication, and Docker.
+A full-stack **Movie Ticket Booking System** developed using **React.js**, **Spring Boot**, **PostgreSQL**, **Spring Security**, **BCrypt Authentication**, and **Docker**.
 
-The application allows users to browse movie shows, select theaters and seats, book tickets, manage reservations, and view booking history through an interactive dashboard. Administrators can monitor bookings, analyze theater statistics, manage cancellations, and oversee seat occupancy through a dedicated admin dashboard.
+The application allows users to browse movie shows, select theaters and seats, book tickets, manage reservations, and view booking history through an interactive dashboard. Administrators can monitor bookings, manage reservations, and analyze theater statistics through a dedicated admin dashboard.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-### 👤 User Features
+## 👤 User Features
+
 - User Registration & Login
-- JWT-Based Authentication
+- BCrypt Password Encryption
+- Role-Based Authentication
 - Browse Available Movie Shows
 - Theater & Show Selection
 - Interactive Seat Booking System
 - Real-Time Seat Availability
 - Available & Booked Seat Statistics
-- Booking Confirmation Page
+- Booking Confirmation
 - Booking Dashboard
 - Cancel Bookings
 - Movie Poster Integration
 - Entry & Exit Theater Indicators
 
-### 🛡️ Admin Features
+---
+
+## 🛡️ Admin Features
+
 - Secure Admin Login
+- Role Validation
 - View All User Bookings
 - Booking Statistics Dashboard
 - Theater Statistics
 - Monitor Seat Occupancy
 - Manage Booking Cancellations
 
-### 🎭 Theater Features
-- Dynamic Seat Generation
-- Multiple Theaters
-- Different Theater Capacities
-- Real-Time Seat Availability
-- Available & Booked Seat Statistics
-- Entry & Exit Indicators
-- Interactive Seat Selection Interface
+---
+
+## 🎭 Theater Features
+
+### PVR Chennai
+- Movie: **Salaar**
+- Time: **10:00 AM**
+- Capacity: **100 Seats**
+
+### INOX Bangalore
+- Movie: **RRR**
+- Time: **02:00 PM**
+- Capacity: **120 Seats**
+
+### Cinepolis Hyderabad
+- Movie: **Pushpa 2**
+- Time: **06:00 PM**
+- Capacity: **110 Seats**
+
+### AGS Chennai
+- Movie: **Peddi**
+- Time: **09:00 PM**
+- Capacity: **140 Seats**
 
 ---
 
-## 🏗️ System Architecture
+# 🏗️ System Architecture
 
 ```text
 React Frontend
-      ↓
+        ↓
 Spring Boot REST APIs
-      ↓
+        ↓
 PostgreSQL Database
-```
-
-### Authentication Flow
-
-```text
-User Login
-    ↓
-JWT Token Generated
-    ↓
-Token Stored in Browser
-    ↓
-Protected Routes Access
-    ↓
-Authenticated API Requests
 ```
 
 ---
 
-## 🛠️ Tech Stack
+# 🔐 Authentication Flow
 
-### Frontend
+```text
+User/Admin Login
+        ↓
+Email Validation
+        ↓
+Role Validation
+        ↓
+BCrypt Password Verification
+        ↓
+Authentication Success
+        ↓
+Dashboard Access
+```
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
 - React.js
 - JavaScript (ES6+)
 - CSS3
 - Axios
 - React Router DOM
 
-### Backend
+## Backend
 - Spring Boot
 - Java
 - Spring Security
 - Spring Data JPA
 - REST APIs
 
-### Database
+## Database
 - PostgreSQL
 
-### Security
-- JWT Authentication
+## Security
+- BCrypt Password Hashing
 - Role-Based Access Control (RBAC)
+- Spring Security
 
-### DevOps
+## DevOps
 - Docker
 - Docker Compose
+- Docker Volumes
 
-### Tools
+## Tools
 - Git
 - GitHub
 - Postman
@@ -104,27 +131,27 @@ Authenticated API Requests
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 movie-ticket-booking-system/
 
-├── backend/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   ├── security/
-│   ├── config/
-│   └── Dockerfile
+├── ticket-booking-system/
+│   └── ticket-booking-system/
+│       ├── src/
+│       │   ├── main/
+│       │   │   ├── java/
+│       │   │   └── resources/
+│       │   └── test/
+│       ├── Dockerfile
+│       └── pom.xml
 │
 ├── ticket-frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
-│   │   ├── services/
 │   │   ├── assets/
-│   │   └── styles/
+│   │   └── services/
 │   └── Dockerfile
 │
 ├── docker-compose.yml
@@ -134,57 +161,74 @@ movie-ticket-booking-system/
 
 ---
 
-## 📸 Screenshots
+# 📸 Screenshots
 
 ### Login Page
-Role-based login interface with User and Admin access.
+- User/Admin Role Selection
+- BCrypt Authentication
+- Role Validation
 
 ### Register Page
-New user registration page.
-
-### User Dashboard
-View booking history, movie posters, and booking statistics.
+- New User Registration
 
 ### Seat Booking Page
-Interactive theater seat selection with real-time availability.
+- Interactive Seat Selection
+- Real-Time Seat Availability
+- Theater Statistics
 
 ### Booking Confirmation Page
-Dedicated booking success page displaying movie, theater, seats, and booking amount.
+- Movie Details
+- Theater Details
+- Selected Seats
+- Total Price
+
+### User Dashboard
+- Booking History
+- Movie Posters
+- Booking Statistics
 
 ### Admin Dashboard
-Monitor bookings and theater statistics.
+- Booking Management
+- Theater Monitoring
+- Statistics Dashboard
 
 ---
 
-## 🔐 Security
+# 🐳 Docker Architecture
 
-The application uses JWT Authentication for secure access.
-
-### Authentication Features
-
-- Secure Login
-- JWT Token Generation
-- Protected Routes
-- Role-Based Authorization
-- Session Validation
+```text
+Docker Compose
+       │
+       ├── Frontend Container (React)
+       ├── Backend Container (Spring Boot)
+       └── PostgreSQL Container
+               │
+               └── Persistent Docker Volume
+```
 
 ---
 
-## 🐳 Run Using Docker
+# 🐳 Run Using Docker
 
-### Build and Start Containers
+## Build and Start
 
 ```bash
 docker compose up --build -d
 ```
 
-### Stop Containers
+## Start Existing Containers
+
+```bash
+docker compose up -d
+```
+
+## Stop Containers
 
 ```bash
 docker compose down
 ```
 
-### View Running Containers
+## View Running Containers
 
 ```bash
 docker ps
@@ -192,19 +236,27 @@ docker ps
 
 ---
 
-## ▶️ Run Locally
+# ▶️ Run Locally
 
-### Backend
+## Backend
 
 ```bash
-cd backend
+cd ticket-booking-system/ticket-booking-system
 
 mvn clean install
 
 mvn spring-boot:run
 ```
 
-### Frontend
+Backend URL:
+
+```text
+http://localhost:8083
+```
+
+---
+
+## Frontend
 
 ```bash
 cd ticket-frontend
@@ -220,78 +272,87 @@ Frontend URL:
 http://localhost:3000
 ```
 
-Backend URL:
+---
 
-```text
-http://localhost:8083
-```
+# 📊 Database Design
+
+## Tables
+
+- users
+- shows
+- seats
+- bookings
+- booking_seats
+- movie
 
 ---
 
-## 📊 Core Modules
+# 🎯 Core Modules
 
-### Authentication Module
+## Authentication Module
 - User Login
 - Admin Login
-- JWT Security
+- BCrypt Authentication
+- Role Validation
 
-### Booking Module
+## Booking Module
+- Theater Selection
 - Seat Selection
 - Ticket Booking
-- Booking Confirmation Page
+- Booking Confirmation
 - Booking Cancellation
-- Seat Availability Statistics
 
-### Dashboard Module
-- User Statistics
-- Booking Overview
+## Dashboard Module
+- Booking History
 - Movie Information
+- Booking Statistics
 
-### Admin Module
+## Admin Module
 - Booking Management
-- Theater Monitoring
-- Statistics Dashboard
+- Seat Monitoring
+- Theater Statistics
 
 ---
 
-## 🔮 Future Improvements
+# 🔮 Future Improvements
 
-- Online Payment Gateway Integration
+- Payment Gateway Integration
+- QR Code Tickets
 - Email Ticket Confirmation
-- QR Code-Based Tickets
-- Movie Search & Filtering
-- Responsive Mobile Design
+- Movie Search & Filters
 - Notification System
-- Theater Analytics
 - Booking Reports
+- Responsive Mobile Design
 - Dark Mode Support
+- Theater Analytics
 
 ---
 
-## 🎯 Learning Outcomes
+# 🎓 Learning Outcomes
 
-Through this project, I gained hands-on experience in:
+Through this project, I gained practical experience in:
 
 - Full Stack Development
-- React.js Frontend Development
-- Spring Boot Backend Development
+- React.js Development
+- Spring Boot Development
 - REST API Design
-- JWT Authentication
-- PostgreSQL Database Management
-- Docker Containerization
-- Git & GitHub Workflow
-- Frontend and Backend Integration
+- PostgreSQL Database Design
+- Spring Security
+- BCrypt Authentication
 - Role-Based Access Control
-- UI/UX Design and Frontend Optimization
+- Docker Containerization
+- Docker Compose
+- Persistent Docker Volumes
+- Git & GitHub Workflow
+- Frontend-Backend Integration
+- UI/UX Design
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Sunil Kamatham**
 
 Computer Science Student | Full Stack Developer
 
 GitHub: https://github.com/kamathamsunil9
-
----
